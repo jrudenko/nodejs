@@ -32,10 +32,10 @@ async function removeContact(contactId) {
     const removedContact = contacts.find((item) => item.id === contactId);
     const newContactList = contacts.filter((item) => item.id !== contactId);
     fs.writeFile(contactsPath, JSON.stringify(newContactList));
-    console.log(`Contact id "${contactId}" deleted successfully!`);
+    console.log(`Contact id "${contactId}" deleted successfully!`.green);
     return removedContact;
   } catch (err) {
-    console.log(`contact with id #${contactId} is not in the database`);
+    console.log(`contact with id #${contactId} is not in the database`.red);
   }
 }
 
