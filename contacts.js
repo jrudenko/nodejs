@@ -30,7 +30,7 @@ async function removeContact(contactId) {
   try {
     const contacts = await listContacts();
     const removedContact = contacts.find((item) => item.id === contactId);
-    const newContactList = contacts.filter((item) => item.id == !contactId);
+    const newContactList = contacts.filter((item) => item.id !== contactId);
     fs.writeFile(contactsPath, JSON.stringify(newContactList));
     console.log(`Contact id "${contactId}" deleted successfully!`);
     return removedContact;
