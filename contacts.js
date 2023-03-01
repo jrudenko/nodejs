@@ -29,19 +29,13 @@ async function getContactById(contactId) {
 async function removeContact(contactId) {
   try {
     const contacts = await listContacts();
-    const removedContact = contacts.findIndex((item) => item.id === contactId);
+    const removedContact = contacts.find((item) => item.id === contactId);
     const newContactList = contacts.filter((item) => item.id == !contactId);
     fs.writeFile(contactsPath, JSON.stringify(newContactList));
-    if (removedContact >= 0) {
-      contacts.splice(removedContact, 1);
-      await fs.writeFile(contactsPath, JSON.stringify(contacts));
-      console.log(`Contact id "${contactId}" deleted successfully!`);
-    } else {
-      console.log(`contact with id #${contactId} is not in the database`);
-    }
+    console.log(`Contact id "${contactId}" deleted successfully!`);
     return removedContact;
   } catch (err) {
-    console.error(err.message);
+    console.log(`contact with id #${contactId} is not in the database`);
   }
 }
 
